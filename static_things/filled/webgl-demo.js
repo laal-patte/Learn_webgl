@@ -78,13 +78,25 @@ function initBuffers(gl) {
 
   // Now create an array of positions for the square.
 
-  const positions = [
-     0.0,  2.0,
-     1.0, -1.5,
-    -1.5,  1.0,
-     1.5,  1.0,
-    -1.0, -1.5,
+  const positions_square = [
+    -1.0,  1.0,
+     1.0,  1.0,
+     1.0, -1.0,
+    -1.0, -1.0,
   ];
+
+  const positions_star = [
+     0.0,  1.5,
+     1.5, -0.7,
+    -1.5, -0.7,
+     0.0, -1.5,
+    -1.5,  0.7,
+     1.5,  0.7,
+  ];
+
+  const positions = positions_square; // positions_star for star
+  vertices_figure = 4; // 6 for star
+  mode = gl.TRIANGLE_FAN; // gl.TRIANGLES for star
 
   // Now pass the list of positions into WebGL to build the
   // shape. We do this by creating a Float32Array from the
@@ -181,8 +193,8 @@ function drawScene(gl, programInfo, buffers) {
 
   {
     const offset = 0;
-    const vertexCount = 5;
-    gl.drawArrays(gl.LINE_LOOP, offset, vertexCount);
+    const vertexCount = vertices_figure;
+    gl.drawArrays(mode, offset, vertexCount);
   }
 }
 
